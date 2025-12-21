@@ -1,0 +1,24 @@
+/* Minecraft Fonts */
+@font-face {
+  font-family: 'MinecraftRegular';
+  src: url('/fonts/MinecraftRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinecraftTen';
+  src: url('/fonts/MinecraftTen.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+/* Test class to verify font is loading */
+.test-minecraft {
+  font-family: 'MinecraftRegular', monospace;
+  font-size: 2rem;
+}
