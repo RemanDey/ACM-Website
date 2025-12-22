@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import MinecraftHotbar from "./MinecraftHotbar";
+import InfiniteMenu from "./InfiniteMenu";
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,35 +26,89 @@ const AboutSection = () => {
     };
   }, []);
 
+  const aboutContent = [
+    {
+      image: './about/innovation.jpg',
+      link: '#',
+      title: 'INNOVATION',
+      description: ''
+    },
+    {
+      image: './about/community.png',
+      link: '#',
+      title: 'COMMUNITY',
+      description: ''
+    },
+    {
+      image: './about/events.png',
+      link: '#',
+      title: 'EVENTS',
+      description: ''
+    },
+  ];
+
   return (
     <section
       ref={sectionRef}
       id="about"
       className="min-h-screen bg-black text-white relative overflow-hidden flex items-center py-20"
     >
-      {/* Background - Same as Hero */}
+      {/* Background - Same as Hero but with minecraft_bg2.png */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center scale-105"
+        className={`absolute inset-0 z-0 bg-cover bg-center scale-105 transition-opacity duration-1000 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
         style={{
           backgroundImage: 'url(/minecraft_bg2.png)',
           filter: 'blur(0px)',
           imageRendering: 'pixelated',
         }}
       />
-
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: `
+            linear-gradient(
+              to bottom,
+              rgba(0, 0, 0, 1) 0%,
+              rgba(0, 0, 0, 0.9) 10%,
+              rgba(0, 0, 0, 0.7) 40%,
+              rgba(0, 0, 0, 0.4) 60%,
+              rgba(0, 0, 0, 0) 70%
+            )
+          `,
+        }}
+      />
       {/* Dark overlay - Same as Hero */}
-      <div className="absolute inset-0  from-black/60 via-black/50 to-black/70 z-0" />
-      <MinecraftHotbar />
+      <div 
+        className={`absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 z-0 transition-opacity duration-1000 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
       <div className="container mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side - Image */}
+          
+          {/* Left Side - Video */}
           <div
-            className={`relative transition-all duration-1000 ease-out ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-              }`}
+            className={`relative transition-all duration-1000 ease-out ${
+              isVisible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+            }mt-24 md:mt-36`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="relative aspect-square rounded-lg overflow-hidden">
-              {/* PNG Image */}
+            <div className="relative aspect-square overflow-hidden">
+              {/* Glow effect behind video */}
+              <div className="absolute inset-0 -z-10">
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full animate-pulse"
+                  style={{
+                    filter: "blur(60px)",
+                  }}
+                />
+              </div>
+
               <video
                 src="/steve-dance-transparent.webm"
                 autoPlay
@@ -63,21 +117,17 @@ const AboutSection = () => {
                 playsInline
                 className="w-full h-full object-contain pointer-events-none"
                 style={{
-                  mixBlendMode: "screen",
-                  backgroundColor: "transparent",
                   imageRendering: "pixelated",
                 }}
               />
-
-
-             
             </div>
           </div>
 
-          {/* Right Side - About Content */}
+          {/* Right Side - About Title + InfiniteMenu */}
           <div
-            className={`space-y-6 transition-all duration-1000 ease-out ${isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-              }`}
+            className={`space-y-6 transition-all duration-1000 ease-out ${
+              isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+            }`}
             style={{ transitionDelay: "400ms" }}
           >
             {/* Section Title */}
@@ -101,54 +151,11 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* About Description */}
-            <div className="space-y-4">
-              <div
-                className="p-6 backdrop-blur-sm rounded-lg hover:scale-[1.02] transition-all duration-300"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))",
-                  border: "2px solid rgba(139, 92, 246, 0.3)",
-                  boxShadow: "0 8px 32px rgba(139, 92, 246, 0.2)",
-                }}
-              >
-                <p
-                  className="text-gray-300 text-base md:text-lg leading-relaxed"
-                  style={{
-                    fontFamily: "'Minecraft', monospace",
-                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
-                  }}
-                >
-                  ACM (Association for Computing Machinery) is the world's largest
-                  educational and scientific computing society, uniting computing
-                  educators, researchers, and professionals to inspire dialogue,
-                  share resources, and address the field's challenges.
-                </p>
-              </div>
-
-              <div
-                className="p-6 backdrop-blur-sm rounded-lg hover:scale-[1.02] transition-all duration-300"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1))",
-                  border: "2px solid rgba(59, 130, 246, 0.3)",
-                  boxShadow: "0 8px 32px rgba(59, 130, 246, 0.2)",
-                }}
-              >
-                <p
-                  className="text-gray-300 text-base md:text-lg leading-relaxed"
-                  style={{
-                    fontFamily: "'Minecraft', monospace",
-                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
-                  }}
-                >
-                  Our student chapter brings together passionate individuals who
-                  share a common interest in technology, innovation, and
-                  professional development. We organize workshops, hackathons,
-                  tech talks, and networking events to foster growth in the
-                  computing community.
-                </p>
-              </div>
+            {/* InfiniteMenu */}
+            <div className="relative h-[600px] w-full">
+              
+              
+              <InfiniteMenu items={aboutContent} scale={1} />
             </div>
           </div>
         </div>

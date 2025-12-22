@@ -97,7 +97,23 @@ const HeroSection = () => {
           imageRendering: 'pixelated',
         }}
       />
- 
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: `
+            linear-gradient(
+              to top,
+              rgba(0, 0, 0, 1) 0%,
+              rgba(0, 0, 0, 0.9) 10%,
+              rgba(0, 0, 0, 0.7) 40%,
+              rgba(0, 0, 0, 0.4) 60%,
+              rgba(0, 0, 0, 0) 70%
+            )
+          `,
+        }}
+      />
       <div className={`absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 z-0 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} />
         <MinecraftHotbar />
 
@@ -145,17 +161,7 @@ const HeroSection = () => {
               </Suspense>
             </Canvas>
 
-            {/* Enhanced Glow Effect */}
-            <div className="absolute inset-0 -z-10 pointer-events-none">
-              <div
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full animate-pulse transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                style={{
-                  background: 'radial-gradient(circle, rgba(138, 43, 226, 0.4), rgba(0, 119, 255, 0.3), rgba(0, 255, 255, 0.2), transparent)',
-                  filter: 'blur(60px)',
-                  transitionDelay: '500ms',
-                }}
-              />
-            </div>
+            
           </div>
         </div>
       </div>
