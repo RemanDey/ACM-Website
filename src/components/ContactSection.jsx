@@ -1,6 +1,30 @@
 import { useState, useEffect, useRef } from "react";
-import ModelViewer from "./ModelViewer";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
+/* ===================== */
+/* STEVE MODEL */
+/* ===================== */
+function SteveModel() {
+  const ref = useRef();
+  const { scene } = useGLTF("/steve.glb");
+
+  useFrame(() => {
+    if (ref.current) ref.current.rotation.y += 0.006;
+  });
+
+  return (
+    <group ref={ref} scale={0.13} position={[0, -0.5, 0]}>
+      <primitive object={scene} />
+    </group>
+  );
+}
+
+useGLTF.preload("/steve.glb");
+
+/* ===================== */
+/* CONTACT SECTION */
+/* ===================== */
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,7 +52,6 @@ const ContactSection = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulating a Minecraft "Saving World" delay
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus("success");
@@ -37,7 +60,6 @@ const ContactSection = () => {
     }, 1500);
   };
 
-  // Minecraft UI styles for reuse
   const pixelBorder = {
     boxShadow: "inset -4px -4px 0px #555, inset 4px 4px 0px #fff",
     backgroundColor: "#c6c6c6",
@@ -57,23 +79,62 @@ const ContactSection = () => {
       id="contact"
       className="min-h-screen relative overflow-hidden flex items-center py-20 bg-[#313131]"
     >
-      {/* BACKGROUND - Tiled dirt/stone pattern */}
+      {/* BACKGROUND */}
       <div
         className="absolute inset-0 z-0 opacity-40"
         style={{
-          backgroundImage: "url(/minecraft_bg3.png)", // Use the dark chamber image you generated
+          backgroundImage: "url(/minecraft_bg3.png)",
           backgroundSize: "cover",
           imageRendering: "pixelated",
+        }}
+      />
+
+      {/* TOP FADE */}
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: `
+            linear-gradient(
+              to bottom,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,0.9) 10%,
+              rgba(0,0,0,0.6) 40%,
+              rgba(0,0,0,0) 70%
+            )
+          `,
+        }}
+      />
+
+      {/* BOTTOM FADE */}
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: `
+            linear-gradient(
+              to top,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,0.9) 15%,
+              rgba(0,0,0,0.6) 40%,
+              rgba(0,0,0,0) 75%
+            )
+          `,
         }}
       />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
 
-          {/* LEFT — THE FORM (Styled like a Chest or Inventory) */}
+          {/* LEFT — FORM (ORIGINAL) */}
           <div
-            className={`transition-all duration-700 p-1 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
-              }`}
+            className={`transition-all duration-700 p-1 ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-20 opacity-0"
+            }`}
             style={pixelBorder}
           >
             <div className="p-6 md:p-10 space-y-6 bg-[#c6c6c6]">
@@ -89,15 +150,15 @@ const ContactSection = () => {
                   <div className="flex flex-col gap-2">
                     <label className="text-[#3f3f3f] text-sm font-bold">NAME</label>
                     <input
-                      type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="p-3 outline-none focus:border-[#7cfc00]"
+                      className="p-3 outline-none"
                       style={inputStyle}
                     />
                   </div>
+
                   <div className="flex flex-col gap-2">
                     <label className="text-[#3f3f3f] text-sm font-bold">EMAIL</label>
                     <input
@@ -106,7 +167,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="p-3 outline-none focus:border-[#7cfc00]"
+                      className="p-3 outline-none"
                       style={inputStyle}
                     />
                   </div>
@@ -115,12 +176,11 @@ const ContactSection = () => {
                 <div className="flex flex-col gap-2">
                   <label className="text-[#3f3f3f] text-sm font-bold">SUBJECT</label>
                   <input
-                    type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="p-3 outline-none focus:border-[#7cfc00]"
+                    className="p-3 outline-none"
                     style={inputStyle}
                   />
                 </div>
@@ -128,31 +188,29 @@ const ContactSection = () => {
                 <div className="flex flex-col gap-2">
                   <label className="text-[#3f3f3f] text-sm font-bold">MESSAGE</label>
                   <textarea
-                    name="message"
                     rows="4"
+                    name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="p-3 outline-none focus:border-[#7cfc00] resize-none"
+                    className="p-3 outline-none resize-none"
                     style={inputStyle}
                   />
                 </div>
 
-                {/* MINECRAFT BUTTON */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 text-white text-xl font-bold relative group active:translate-y-1 transition-all"
+                  className="w-full py-4 text-white text-xl font-bold active:translate-y-1 transition-all"
                   style={{
                     backgroundColor: "#7c7c7c",
                     border: "4px solid #000",
-                    boxShadow: "inset -4px -4px 0px #373737, inset 4px 4px 0px #afafaf",
+                    boxShadow:
+                      "inset -4px -4px 0px #373737, inset 4px 4px 0px #afafaf",
                     textShadow: "2px 2px 0 #000",
                   }}
                 >
-                  <span className="group-hover:text-[#ffffa0]">
-                    {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-                  </span>
+                  {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
                 </button>
 
                 {submitStatus === "success" && (
@@ -163,42 +221,24 @@ const ContactSection = () => {
               </form>
             </div>
           </div>
- 
+
+          {/* RIGHT — STEVE MODEL */}
           <div
-            className={`flex flex-col items-center justify-center transition-all duration-1000 delay-300 ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"
-              }`}
+            className={`flex items-center justify-center transition-all duration-1000 delay-300 ${
+              isVisible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+            }`}
           >
-            <div className="relative group">
-              {/* Decorative floating label */}
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#000000aa] border-2 border-[#5555ff] px-4 py-1 whitespace-nowrap hidden group-hover:block z-20">
-                <p className="text-[#55ffff] text-sm" style={{ fontFamily: "'Minecraft', monospace" }}>
-                  Player: Steve
-                </p>
-              </div>
+            <div className="w-[420px] h-[420px] md:w-[520px] md:h-[520px]">
+              <Canvas camera={{ position: [0, 1.5, 5], fov: 50 }}>
+                <ambientLight intensity={0.8} />
+                <directionalLight position={[5, 5, 5]} intensity={1.2} />
+                <directionalLight position={[-5, 5, -5]} intensity={0.6} />
+                <pointLight position={[0, 3, 3]} intensity={0.8} />
 
-              <ModelViewer
-                url="/steve.glb"
-                width={600}
-                height={600}
-                autoFrame={false}          // Set to false so defaultZoom works
-                defaultZoom={3.2}          // Adjust this value to zoom in/out (3 to 4 is usually best)
-                minZoomDistance={2.0}      // Prevents users from zooming in too close
-                maxZoomDistance={6.0}      // Prevents users from zooming out too far
-                modelYOffset={-0.2}        // Optional: moves model slightly down in the frame
-              />
-            </div>
+                <SteveModel />
 
-            {/* STATS BUBBLES */}
-            <div className="flex gap-4 mt-8">
-              {[
-                { label: "MAIL", value: "2" },
-                { label: "LVL", value: "13" }
-              ].map((stat, i) => (
-                <div key={i} className="px-6 py-2" style={pixelBorder}>
-                  <p className="text-[#3f3f3f] font-bold text-xs">{stat.label}</p>
-                  <p className="text-black font-bold text-xl">{stat.value}</p>
-                </div>
-              ))}
+                <OrbitControls enableZoom={false} enablePan={false} />
+              </Canvas>
             </div>
           </div>
 
