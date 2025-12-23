@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import InfiniteMenu from "./InfiniteMenu";
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,26 +25,7 @@ const AboutSection = () => {
     };
   }, []);
 
-  const aboutContent = [
-    {
-      image: './about/innovation.jpg',
-      link: '#',
-      title: 'INNOVATION',
-      description: ''
-    },
-    {
-      image: './about/community.png',
-      link: '#',
-      title: 'COMMUNITY',
-      description: ''
-    },
-    {
-      image: './about/events.png',
-      link: '#',
-      title: 'EVENTS',
-      description: ''
-    },
-  ];
+
 
   return (
     <section
@@ -133,14 +113,14 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right Side - About Title + InfiniteMenu */}
+          {/* Right Side - About Content */}
           <div
-            className={`space-y-6 transition-all duration-1000 ease-out ${isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+            className={`space-y-8 transition-all duration-1000 ease-out ${isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
               }`}
             style={{ transitionDelay: "400ms" }}
           >
             {/* Section Title */}
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h2
                 className="text-5xl md:text-6xl lg:text-7xl font-bold"
                 style={{
@@ -160,11 +140,56 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* InfiniteMenu */}
-            <div className="relative h-[600px] w-full">
+            {/* Description */}
+            <p
+              className="text-lg md:text-xl text-gray-300 leading-relaxed"
+              style={{
+                fontFamily: "'Minecraft', monospace",
+                textShadow: "2px 2px 0 #000000",
+              }}
+            >
+              We are the <span className="text-emerald-400">ACM Student Chapter</span> at IIT Mandi — a community of passionate coders, builders, and innovators exploring the frontiers of computing.
+            </p>
 
-
-              <InfiniteMenu items={aboutContent} scale={1} />
+            {/* Key Highlights */}
+            <div className="space-y-4 pt-4">
+              {[
+                {title: "INNOVATE", desc: "Push boundaries with cutting-edge projects" },
+                {title: "COLLABORATE", desc: "Build together, learn together, grow together" },
+                {title: "COMPETE", desc: "Hackathons, coding contests & tech challenges" },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start gap-4 p-4 rounded-lg transition-all duration-500 hover:scale-105 ${isVisible ? "opacity-400 translate-y-0" : "opacity-0 translate-y-4"
+                    }`}
+                  style={{
+                    transitionDelay: `${600 + index * 150}ms`,
+                    background: "rgba(255, 255, 255, 0.03)",
+                    border: "2px solid rgba(255, 255, 255, 0.1)",
+                    backdropFilter: "blur(4px)",
+                  }}
+                >
+                  <div>
+                    <h3
+                      className="text-2xl font-bold text-white mb-1"
+                      style={{
+                        fontFamily: "'Minecraft', monospace",
+                        textShadow: "2px 2px 0 #000000",
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-gray-300 text-lg"
+                      style={{
+                        fontFamily: "'Minecraft', monospace",
+                      }}
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
