@@ -1,29 +1,36 @@
 const Footer = () => {
   return (
-    <footer>
-      <h3>ACM Chapter</h3>
-      <p>
-        Exploring the depths of the trial chambers since 2021. Built with love
-        and a lot of Redstone.
-      </p>
-
-      <nav aria-label="Footer navigation">
-        <h4>Navigation</h4>
-        <ul>
-          <li>Team</li>
-          <li>Events</li>
-          <li>About</li>
-          <li>Store</li>
-        </ul>
-      </nav>
-
-      <p>© 2025 Minecraft Project. Not an official Minecraft product.</p>
-
-      <ul>
-        <li><a href="#">Discord</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">YouTube</a></li>
-      </ul>
+    <footer className="site-footer">
+      <div className="container">
+        <div className="footer__grid">
+          <div>
+            <h3>ACM Chapter</h3>
+            <p>
+              Exploring the depths of Computing Machinery and its applications, ACM IIT Mandi Student Chapter is a hub for tech enthusiasts to learn, collaborate, and innovate.
+            </p>
+          </div>
+          <div>
+            <h4>Navigation</h4>
+            <ul className="footer__nav">
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#">Store</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Connect</h4>
+            <ul className="footer__nav">
+              <li><a href="#">Discord</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer__bottom">
+          <p>© 2026 ACM IIT Mandi Student Chapter.</p>
+        </div>
+      </div>
     </footer>
   );
 };
