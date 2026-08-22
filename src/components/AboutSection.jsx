@@ -28,7 +28,7 @@ const AboutSection = () => {
     <section id="about" className="section">
       <div className="container section__grid">
         <div className="section__aside">
-          <p className="eyebrow">01 · About</p>
+          <p className="eyebrow">About</p>
         </div>
         <div className="section__main">
           <h2>About Us</h2>

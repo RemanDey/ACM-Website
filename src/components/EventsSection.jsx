@@ -26,7 +26,7 @@ const EventsSection = () => {
     <section id="events" className="section">
       <div className="container section__grid">
         <div className="section__aside">
-          <p className="eyebrow">02 · Events</p>
+          <p className="eyebrow">Events</p>
         </div>
         <div className="section__main">
           <h2>Events</h2>

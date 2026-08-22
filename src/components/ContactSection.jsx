@@ -22,7 +22,7 @@ const ContactSection = () => {
     <section id="contact" className="section">
       <div className="container section__grid">
         <div className="section__aside">
-          <p className="eyebrow">03 · Contact</p>
+          <p className="eyebrow">Contact</p>
           <p className="text">
             Questions, collaborations, or ideas — we'd love to hear from you.
           </p>

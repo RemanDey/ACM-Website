@@ -1,23 +1,22 @@
-import { Link } from 'react-router-dom';
-
 const HeroSection = () => {
   return (
     <>
       <header className="site-header">
         <div className="container site-header__inner">
-          <Link className="wordmark" to="/">
+          <a className="wordmark" href="#top">
             <img className="wordmark__logo" src="/acm-logo.png" alt="ACM IIT Mandi logo" />
             <span>ACM IIT Mandi</span>
-          </Link>
+          </a>
           <nav className="site-nav">
-            <Link to="/about">About</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/contact">Contact</Link>
+            <a href="#events">Events</a>
+            <a href="#news">News</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </nav>
         </div>
       </header>
 
-      <section className="hero">
+      <section className="hero" id="top">
         <div className="container">
           <p className="eyebrow">Student Chapter · Association for Computing Machinery</p>
           <h1 className="hero__title">ACM IIT Mandi</h1>
