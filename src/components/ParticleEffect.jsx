@@ -116,7 +116,7 @@ const ParticleEffect = ({ particleCount = 30, color = "rgba(95, 168, 222, 0.4)",
       }
 
       ctx.globalAlpha = 1;
-      const particleColor = color.replace(/[\d.]+\)$/, '0.7)');
+      const particleColor = color.replace(/[\d.]+\)$/, '1)');
 
       particlesRef.current.forEach((p) => {
         const px = (p.x / 100) * width;
