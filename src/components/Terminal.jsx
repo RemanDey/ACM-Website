@@ -128,6 +128,7 @@ const Terminal = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [minimized, setMinimized] = useState(false);
   const inputRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -210,12 +211,31 @@ const Terminal = () => {
     scrollToBottom();
   }, [output]);
 
+  const toggleMinimize = () => {
+    setMinimized(!minimized);
+  };
+
+  if (minimized) {
+    return (
+      <div className="terminal terminal-minimized" onClick={toggleMinimize}>
+        <div className="terminal-header">
+          <div className="terminal-controls">
+            <span className="control close" onClick={(e) => { e.stopPropagation(); setMinimized(false); }} />
+            <span className="control minimize" onClick={toggleMinimize} />
+            <span className="control maximize" />
+          </div>
+          <div className="terminal-title">terminal.acm-iitmandi.ac.in</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="terminal" ref={containerRef}>
       <div className="terminal-header">
         <div className="terminal-controls">
-          <span className="control close" />
-          <span className="control minimize" />
+          <span className="control close" onClick={() => setMinimized(true)} />
+          <span className="control minimize" onClick={toggleMinimize} />
           <span className="control maximize" />
         </div>
         <div className="terminal-title">terminal.acm-iitmandi.ac.in</div>

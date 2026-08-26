@@ -984,3 +984,20 @@ p {
     border-bottom: none;
   }
 }
+
+.terminal-minimized {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.terminal-minimized .terminal-body {
+  display: none;
+}
+
+.terminal-minimized .terminal-header {
+  cursor: pointer;
+}
+
+.terminal-minimized .control.close {
+  display: none;
+}
