@@ -87,7 +87,7 @@ const ParticleEffect = ({ particleCount = 30, color = "rgba(95, 168, 222, 0.4)",
       const connDistPx = (connectionDistance / 100) * Math.min(width, height);
       const connDistSq = connDistPx * connDistPx;
 
-      ctx.strokeStyle = color.replace(/[\d.]+\)$/, '0.15)');
+      ctx.strokeStyle = color.replace(/[\d.]+\)$/, '0.35)');
       ctx.lineWidth = 0.5;
 
       for (let i = 0; i < particlesRef.current.length; i++) {
@@ -106,7 +106,7 @@ const ParticleEffect = ({ particleCount = 30, color = "rgba(95, 168, 222, 0.4)",
 
           if (distSq < connDistSq) {
             const opacity = 1 - distSq / connDistSq;
-            ctx.globalAlpha = opacity * 0.3;
+            ctx.globalAlpha = opacity * 0.5;
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
