@@ -1,3 +1,5 @@
+import ParticleEffect from './ParticleEffect';
+
 const HeroSection = () => {
   return (
     <>
@@ -17,6 +19,7 @@ const HeroSection = () => {
       </header>
 
       <section className="hero" id="top">
+        <ParticleEffect particleCount={40} color="rgba(95, 168, 222, 0.7)" />
         <div className="container">
           <p className="eyebrow">Student Chapter · Association for Computing Machinery</p>
           <h1 className="hero__title">ACM IIT Mandi</h1>

@@ -5,6 +5,7 @@ import EventsSection from '../components/EventsSection'
 import ContactSection from '../components/ContactSection'
 import NewsSection from '../components/NewsSection'
 import Footer from '../components/Footer'
+import Terminal from '../components/Terminal'
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       <AboutSection />
       <ContactSection />
       <Footer />
+      <Terminal />
     </>
   )
 }
